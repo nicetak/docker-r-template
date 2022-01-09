@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:latest
 
-RUN apt update && apt install -y gnupg openssh-client
+RUN apt update && apt install -y gnupg openssh-client texlive-full
 
 # DVC
 RUN wget \
