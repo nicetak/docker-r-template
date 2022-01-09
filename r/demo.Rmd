@@ -1,0 +1,39 @@
+---
+title: "Demo Analysis"
+author: "Kazuharu Yanagimoto"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = here::here("html")) })
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(here)
+library(tidyverse)
+```
+
+This notebook just replicates some of the example of [cars](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/cars.html) from `datasets` by using `tidyverse`.
+
+The data is set by the following code.
+```r
+write_csv(as.tibble(cars), file = here("data/cars.csv"))
+```
+
+## Analysis
+### Plot
+```{r}
+cars %>% 
+  ggplot(aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_smooth(span = 2/3) +
+  labs(title = "cars data", x = "Speed (mph)", y = "Stopping distance (ft)") +
+  theme_minimal()
+```
+
+### Regression
+```{r}
+summary(fm1 <- lm(log(dist) ~ log(speed), data = cars))
+```
+

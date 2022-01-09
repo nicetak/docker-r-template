@@ -12,5 +12,4 @@ RUN wget \
 
 
 # R Packages
-RUN R -e "install.packages( \
-    c('languageserver', 'here', 'kableExtra', 'patchwork', 'janitor', 'markdown'))"
+RUN R -e "install.packages(c('languageserver', 'here', 'markdown'))"
